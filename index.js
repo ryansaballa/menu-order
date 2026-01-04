@@ -108,9 +108,17 @@ function renderCheckout() {
 // --- Remove item from cart ---
 function handleRemoveClick(itemId) {
   const index = itemChoice.findIndex((item) => item.id === itemId)
+  // if statement that triggers if an element is found in array (-1 means not found)
   if (index !== -1) {
-    itemChoice.splice(index, 1)
+    if (itemChoice[index].amount > 1) {
+      //reduce item.amount by 1
+      itemChoice[index].amount -= 1
+    } else {
+      //removes items completely if only 1
+      itemChoice.splice(index, 1)
+    }
   }
+
   renderCheckout()
 }
 
